@@ -11,3 +11,7 @@ CREATE TABLE users (
     role_id_user INT UNSIGNED NOT NULL,
     FOREIGN KEY (role_id_user) REFERENCES roles(role_id)
 );
+
+insert into roles (role_name) values('Engineer');
+
+insert into users (user_name, role_id_user) values('Petru', 1)    
