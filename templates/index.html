@@ -11,11 +11,13 @@
     <label for="cars">Choose a role:</label>
 
     <select name="all_roles" id="all_roles">
-      {% for user in userDetails %}
-        <option value='{{user[0]}}'>{{user[1]}}</option>
+      {% for role in userDetails %}
+        <option value='{{role[0]}}'>{{role[1]}}</option>
       {% endfor %}
 
     </select>
 
     <input type="submit">
 </form>
+
+<button type="button" onclick="window.location.href='{{ url_for( 'users') }}';">Show users and their roles</button>

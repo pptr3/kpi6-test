@@ -35,7 +35,7 @@ def index():
             cur.close()
 
     cur = mysql.connection.cursor()
-    all_roles = cur.execute("SELECT * FROM roles")
+    all_roles = cur.execute("SELECT role_id, role_name FROM roles GROUP BY role_name")
     userDetails = ''
     if all_roles > 0:
         userDetails = cur.fetchall()
@@ -43,6 +43,13 @@ def index():
     cur.close()
     return render_template('index.html', userDetails=userDetails)
 
+@app.route('/users')
+def users():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT distinct user_name, role_name FROM users u, roles r WHERE u.role_id_user = r.role_id ")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+        return render_template('users.html',userDetails=userDetails)
 
 
 if __name__ == '__main__':
