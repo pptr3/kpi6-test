@@ -1,4 +1,4 @@
-To run the project, you need to habe Flask and Flask-mysqldb installed. 
+To run the project, you need to have Flask and Flask-mysqldb installed. 
 
 `pip install flask`
 
