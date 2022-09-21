@@ -16,27 +16,19 @@ mysql = MySQL(app)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     id_role = request.form.get('all_roles')
-    print(id_role) # here we have the ID of the new user+role\
     if request.method == 'POST':
-
-        # Fetch form data
+        # insert new role
         userDetails = request.form
-        print(userDetails)
-        new_role = userDetails['new_role']
-        #print(new_role) # this is what is in the user+role field
-        # insert new user + role
-        #cur = mysql.connection.cursor()
-        #cur.execute("INSERT INTO users (user_name, role_id_user) VALUES (%s, %s)", (new_user,id_role,))
-        #mysql.connection.commit()
-        #cur.close()
+        if userDetails and 'new_role' in userDetails:
+            new_role = userDetails['new_role']
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO roles (role_name) VALUES (%s)", (new_role,))
+            mysql.connection.commit()
+            cur.close()
 
-        # Fetch form data
-        if not new_role:
-            print("here: ")
-            print(userDetails)
+        # insert new user and assign to a role
+        if userDetails and 'new_user' in userDetails:
             new_user = userDetails['new_user']
-            #print(new_user) # this is what is in the user+role field
-            # insert new user + role
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO users (user_name, role_id_user) VALUES (%s, %s)", (new_user,id_role,))
             mysql.connection.commit()
