@@ -1,7 +1,20 @@
 <form method="POST" action="">
-    Role <input type="text" name="role_name" />
-    <br>
-    User <input type="email" name="email" />
-    <br>
+    Insert new role <input type="text" name="role_name" />
     <input type="submit">
-  </form>
+</form>
+
+
+
+<form method="POST" action="">
+    Insert new user with associated role <input type="text" name="select_role" />
+    <label for="cars">Choose a role:</label>
+
+    <select name="all_roles" id="all_roles">
+      {% for user in userDetails %}
+        <option value="volvo">{{user[1]}}</option>
+      {% endfor %}
+
+    </select>
+
+    <input type="submit">
+</form>

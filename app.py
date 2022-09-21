@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
-import yaml
+
 
 app = Flask(__name__)
 
@@ -8,24 +8,30 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'm'
-app.config['MYSQL_DB'] = 'mydb'
+app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_DB'] = 'rip'
 
 mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # Fetch form data
         userDetails = request.form
         role_name = userDetails['role_name']
-        email = userDetails['email']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO role(role_name) VALUES(%s)",(role_name))
+        cur.execute("INSERT INTO roles (role_name) VALUES (%s)", (role_name,))
         mysql.connection.commit()
         cur.close()
-        #return redirect('/users')
-    return render_template('index.html')
+    else:
+        # get roles
+        cur = mysql.connection.cursor()
+        all_roles = cur.execute("SELECT * FROM roles")
+        userDetails = ''
+        if all_roles > 0:
+            userDetails = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    return render_template('index.html', userDetails=userDetails)
 
 @app.route('/users')
 def users():

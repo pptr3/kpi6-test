@@ -1,15 +1,13 @@
-CREATE TABLE `user`(
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
-
+CREATE TABLE roles (
+    role_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    role_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (role_id)
 );
 
 
-CREATE TABLE `role`(
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `role_name` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE users (
+    id_user INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    role_id_user INT UNSIGNED NOT NULL,
+    FOREIGN KEY (role_id_user) REFERENCES roles(role_id)
 );
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
