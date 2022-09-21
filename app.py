@@ -15,31 +15,43 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    id_role = request.form.get('all_roles')
+    print(id_role) # here we have the ID of the new user+role\
     if request.method == 'POST':
+
+        # Fetch form data
         userDetails = request.form
-        role_name = userDetails['role_name']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO roles (role_name) VALUES (%s)", (role_name,))
-        mysql.connection.commit()
-        cur.close()
-    else:
-        # get roles
-        cur = mysql.connection.cursor()
-        all_roles = cur.execute("SELECT * FROM roles")
-        userDetails = ''
-        if all_roles > 0:
-            userDetails = cur.fetchall()
-        mysql.connection.commit()
-        cur.close()
+        print(userDetails)
+        new_role = userDetails['new_role']
+        #print(new_role) # this is what is in the user+role field
+        # insert new user + role
+        #cur = mysql.connection.cursor()
+        #cur.execute("INSERT INTO users (user_name, role_id_user) VALUES (%s, %s)", (new_user,id_role,))
+        #mysql.connection.commit()
+        #cur.close()
+
+        # Fetch form data
+        if not new_role:
+            print("here: ")
+            print(userDetails)
+            new_user = userDetails['new_user']
+            #print(new_user) # this is what is in the user+role field
+            # insert new user + role
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO users (user_name, role_id_user) VALUES (%s, %s)", (new_user,id_role,))
+            mysql.connection.commit()
+            cur.close()
+
+    cur = mysql.connection.cursor()
+    all_roles = cur.execute("SELECT * FROM roles")
+    userDetails = ''
+    if all_roles > 0:
+        userDetails = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
     return render_template('index.html', userDetails=userDetails)
 
-@app.route('/users')
-def users():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT * FROM users")
-    if resultValue > 0:
-        userDetails = cur.fetchall()
-        return render_template('users.html',userDetails=userDetails)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

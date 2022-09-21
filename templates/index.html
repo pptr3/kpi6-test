@@ -1,17 +1,18 @@
+
 <form method="POST" action="">
-    Insert new role <input type="text" name="role_name" />
+    Insert new role <input type="text" name="new_role" />
     <input type="submit">
 </form>
 
 
 
 <form method="POST" action="">
-    Insert new user with associated role <input type="text" name="select_role" />
+    Insert new user with associated role <input type="text" name="new_user"/>
     <label for="cars">Choose a role:</label>
 
     <select name="all_roles" id="all_roles">
       {% for user in userDetails %}
-        <option value="volvo">{{user[1]}}</option>
+        <option value='{{user[0]}}'>{{user[1]}}</option>
       {% endfor %}
 
     </select>
