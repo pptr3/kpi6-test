@@ -46,7 +46,7 @@ def index():
 @app.route('/users')
 def users():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT distinct user_name, role_name FROM users u, roles r WHERE u.role_id_user = r.role_id ")
+    resultValue = cur.execute("SELECT distinct user_name, role_name FROM users u, roles r WHERE u.role_id_user = r.role_id")
     if resultValue > 0:
         userDetails = cur.fetchall()
         return render_template('users.html',userDetails=userDetails)
