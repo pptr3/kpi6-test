@@ -11,9 +11,12 @@ Run MySql server using the commmand:
 `mysql -u root -p`
 
 Then, to create the database, step in in the folder `kpi6-test` and run: create database rip; 
+
 `mysql -u root -p`
- `create database rip;`
+`create database rip;`
+ 
 `source dp.sql`
+
 
 Now we can run the flask application. Open a new terminal and go into the folder `kpi6-test` again and run:
 
