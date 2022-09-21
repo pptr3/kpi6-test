@@ -23,7 +23,7 @@ Now we can run the flask application. Open a new terminal and go into the folder
 
 `python app.py`
 
-then the server starts. To see this amazing application, open a browser and type:
+then the server starts. To see this amazing application, open a browser and type in the bar address:
 
 `localhost:5000`
 
