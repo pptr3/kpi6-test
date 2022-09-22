@@ -10,7 +10,9 @@ Run MySql server using the commmand:
 
 `mysql -u root -p`
 
-Then, to create the database, step in in the folder `kpi6-test` and run: create database rip; 
+Then, to create the database, step in in the folder `kpi6-test` and run: 
+
+`create database rip;`
 
 `mysql -u root -p`
 
