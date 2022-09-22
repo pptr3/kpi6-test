@@ -12,11 +12,11 @@ Run MySql server using the commmand:
 
 Then, to create the database, step in in the folder `kpi6-test` and run: 
 
-`create database rip;`
-
 `mysql -u root -p`
 
 `create database rip;`
+
+`use rip`
  
 `source dp.sql`
 
